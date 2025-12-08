@@ -1,12 +1,15 @@
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+
 using namespace std;
 
-const double PI = 3.141592653589793;
-const double E = 2.718281828459045;
-
 double f(double x) {
+    // Константи тепер доступні завдяки _USE_MATH_DEFINES
+    const double PI = M_PI;
+    const double E = M_E;
+    
     const double part1 = sin(24.0 / 53.0);
     const double part2 = (4 * E) / (63 * PI) * (7.0 / ((x + 3) * (x - 13)));
     const double part3 = -14 * cos(x + 10);
