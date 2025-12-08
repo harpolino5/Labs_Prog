@@ -1,32 +1,41 @@
 #include <iostream>
-#include <cmath>
 #include <iomanip>
+// <cmath> прибрано
+
 using namespace std;
 
-const double a = 0.0;
-const double b = 1.0;
-
-double S(double x, double eps) {
-    //a0 = x/2
+// Функцію назвала 's' (маленька літера)
+double s(double x, double eps) {
     double term = x / 2.0;
     double sum = 0.0;
     int n = 0;
+    double abs_term = term;
 
-    while (fabs(term) >= eps) {
-        sum += term;
-        n++;
-
-        // a_{n+1}
-
-        term = term * ((n * n + 2 * n + 1) * x) / ((2 * n + 4) * (2 * n + 3));
+    // Якщо число менше нуля, змінюємо знак на протилежний
+    if (abs_term < 0) 
+        abs_term = -abs_term;
     }
 
+    while (abs_term >= eps) {
+        sum += term;
+        n++;
+        // Рекурентна формула
+        term = term * ((n * n + 2 * n + 1) * x) / ((2 * n + 4) * (2 * n + 3));
+        abs_term = term;
+
+        if (abs_term < 0) {
+            abs_term = -abs_term;
+        }
+    }
     return sum;
 }
 
 int main() {
+    const double a = 0.0;
+    const double b = 1.0;
+    
     cout << "The author of this program is Yuliia Akimova from K-14\n";
-    cout << "This program calculates the value of the series S(x) with given accuracy eps. Variant 50.\n\n";
+    cout << "This program calculates the value of the series s(x) with given accuracy eps. Variant 50.\n\n";
     cout << "Enter x (" << a << " <= x <= " << b << "): ";
     double x;
     cin >> x;
@@ -64,21 +73,20 @@ int main() {
         ok = false;
     }
     else {
-        result = S(x, eps);
+        result = s(x, eps); // Викликаємо функцію s
     }
 
     cout << "done\n\n";
 
     cout << scientific << setprecision(5)
-        << "for x = " << x << "\n";
+         << "for x = " << x << "\n";
     cout << scientific << setprecision(8)
-        << "for eps = " << eps << "\n\n";
+         << "for eps = " << eps << "\n\n";
 
     cout << fixed << setprecision(9);
     if (ok)
         cout << "result = " << result << "\n";
     else
         cout << "result = undefined\n";
-
     return 0;
 }
