@@ -12,7 +12,7 @@ double s(double x, double eps) {
     double abs_term = term;
 
     // Якщо число менше нуля, змінюємо знак на протилежний
-    if (abs_term < 0) 
+    if (abs_term < 0) {
         abs_term = -abs_term;
     }
 
